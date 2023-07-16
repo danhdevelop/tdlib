@@ -42,9 +42,7 @@ class TelegramService extends ChangeNotifier {
     _client = tdCreate();
 
     // ignore: unused_local_variable
-    bool storagePermission = await Permission.storage
-        .request()
-        .isGranted; // todo : handel storage permission
+    bool storagePermission = await Permission.storage.request().isGranted; // todo : handel storage permission
     /*try {
       PermissionStatus storagePermission =
           await SimplePermissions.requestPermission(
@@ -59,13 +57,12 @@ class TelegramService extends ChangeNotifier {
     //execute(SetLogStream(logStream: LogStreamEmpty()));
     execute(const SetLogVerbosityLevel(newVerbosityLevel: 1));
     tdSend(_client, const GetCurrentState());
-    _isolate = await Isolate.spawn(_receive, _receivePort.sendPort,
-        debugName: "isolated receive");
+    _isolate = await Isolate.spawn(_receive, _receivePort.sendPort, debugName: "isolated receive");
     _receivePort.listen(_receiver);
   }
 
   static _receive(sendPortToMain) async {
-    TdNativePlugin.registerWith();
+    TdPlugin.registerWith();
     await TdPlugin.initialize();
     //var x = _rawClient.td_json_client_create();
     while (true) {

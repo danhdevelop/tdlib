@@ -1,25 +1,27 @@
 import 'td_plugin.dart';
 import 'web_interop.dart';
 import 'package:js/js_util.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 /// TDLib Web Library Instance.
-class TdWebPlugin extends TdPlugin {
-
-  const TdWebPlugin();
-
-  static late final TdWebPlatform _platform;
+class TdPluginImpl extends TdPlugin {
+  late final TdWebPlatform _platform;
 
   // This class is set to be the default [TdPlugin].web instance.
-  static void registerWith() {
+  static void registerWith([Registrar? registrar]) {
     TdPlugin.initialize = initialize;
   }
 
   static Future<void> initialize([String? libPath]) async {
-    _platform = TdWebPlatform();
-    await promiseToFuture(_platform.initialize(libPath));
-    TdPlugin.instance = const TdWebPlugin();
+    TdWebPlatform platform = TdWebPlatform(jsify({
+      'jsLogVerbosityLevel': 'info',
+      'logVerbosityLevel': 2,
+    }));
+    // await promiseToFuture(platform.initialize(libPath));
+    TdPlugin.instance = TdPluginImpl(platform);
   }
 
+  TdPluginImpl(TdWebPlatform platform) : _platform = platform;
 
   @override
   int tdCreate() => _platform.createClientId();
@@ -70,5 +72,4 @@ class TdWebPlugin extends TdPlugin {
   void setLogMessageCallback(int maxVerbosityLevel, callback) {
     throw UnsupportedError("setLogMessageCallback is not supported in web platform");
   }
-
 }

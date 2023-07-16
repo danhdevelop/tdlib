@@ -10,8 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ffi: ^1.1.2
-  js: ^0.6.3
+  flutter_web_plugins:
+    sdk: flutter
+  ffi: ^2.0.1
+  web_ffi: ^0.7.2
+  js: ^0.6.5
 
 dev_dependencies:
   flutter_test:
@@ -31,17 +34,18 @@ flutter:
     platforms:
       android:
         package: org.naji.td.tdlib
-        dartPluginClass: TdNativePlugin
+        dartPluginClass: TdPlugin
       ios:
-        dartPluginClass: TdNativePlugin
+        dartPluginClass: TdPlugin
       windows:
-        dartPluginClass: TdNativePlugin
+        dartPluginClass: TdPlugin
       macos:
-        dartPluginClass: TdNativePlugin
+        dartPluginClass: TdPlugin
       linux:
-        dartPluginClass: TdNativePlugin
+        dartPluginClass: TdPlugin
       web:
-        pluginClass: TdWebPlugin
+        pluginClass: TdPlugin
+        fileName: tdlib.dart
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

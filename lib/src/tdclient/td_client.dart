@@ -1,10 +1,9 @@
 import 'dart:convert' show json;
-import 'package:tdlib/src/tdapi/tdapi.dart'
-    show TdObject, TdFunction, convertToObject;
+import 'package:tdlib/src/tdapi/tdapi.dart' show TdObject, TdFunction, convertToObject;
 import 'platform_interfaces/td_plugin.dart';
+import 'package:tdlib/src/tdclient/platform_interfaces/td_native_plugin_real.dart' if (dart.library.js) 'package:tdlib/src/tdclient/platform_interfaces/td_web_plugin_real.dart';
 export 'platform_interfaces/td_plugin.dart';
-export 'platform_interfaces/td_native_plugin.dart';
-export 'platform_interfaces/td_web_plugin.dart';
+export 'platform_interfaces/td_native_plugin_real.dart' if (dart.library.js) 'platform_interfaces/td_web_plugin_real.dart';
 
 part 'td_json_client.dart';
 
